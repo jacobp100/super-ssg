@@ -1,6 +1,8 @@
 import type { Config } from "super-ssg";
 import Layout, { filenameInfo } from "./docs/Layout";
 
+console.log(process.env);
+
 export default {
   pages: "docs/**/*.mdx",
   baseurl: process.env.BASE_URL,

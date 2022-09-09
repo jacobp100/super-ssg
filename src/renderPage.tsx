@@ -75,8 +75,6 @@ export default async ({ page, pages }: Props) => {
   }
 
   const filename = url === "/" ? "/index" : url;
-  console.log({ url, filename, pageUrl: page.url });
-
   content.write(html, { filename, extension: ".html" });
 
   return {
