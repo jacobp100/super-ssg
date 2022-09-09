@@ -8,7 +8,7 @@ export default {
     const { sectionIndex, pageIndex, pageTitle } = filenameInfo(filename);
     return sectionIndex === 0 && pageIndex === 0
       ? "/"
-      : "/" + pageTitle.toLocaleLowerCase().replace(/\s+/, "-");
+      : "/" + pageTitle.toLocaleLowerCase().replace(/\s+/g, "-");
   },
   Layout,
   cssAnalyzer: true,
