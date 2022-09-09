@@ -50,7 +50,7 @@ const write = (
   fs.writeFileSync(path.join(sitePath, outputFilename), content);
 
   // FIXME - we can probably fix this unsafe config reading
-  const baseurl = unsafelyReadConfig().baseurl ?? "/";
+  const baseurl = unsafelyReadConfig().baseurl ?? "";
   const outputHref = `${baseurl}${outputFilename}`;
 
   return outputHref;
