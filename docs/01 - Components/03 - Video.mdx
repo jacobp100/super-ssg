@@ -1,0 +1,13 @@
+Utility component to load a video, and have it output to the `/res` folder. Does not optimise the video, as it's too expensive. Takes a `src` prop as defined in the [assets structure section](</docs/00 - Introduction/01 - Structure.mdx>).
+
+```js
+import { Video } from "super-ssg";
+
+<Video src="/path/to/your.mp4" type="video/mp4" />;
+```
+
+```html
+<video>
+  <source src="/res/video.mp4" type="video/mp4" />
+</video>
+```

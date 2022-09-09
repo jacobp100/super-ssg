@@ -1,0 +1,19 @@
+Returns all the pages in the project. Each page has properties `filename`, `url`, and anything else exported from the MDX file itself.
+
+```js
+import { useTableOfContents } from "super-ssg";
+
+export const TOC = () => {
+  const posts = useTableOfContents().filter((page) => {
+    return page.filename.startsWith("/posts");
+  });
+
+  return (
+    <ul>
+      {posts.map((post) => (
+        <li key={post.url}>{path.basename(post.filename)}</li>
+      ))}
+    </ul>
+  );
+};
+```

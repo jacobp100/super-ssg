@@ -1,0 +1,73 @@
+Almost all asset transforms consist of a transform function, a content object to read and write assets, then a React hook to get the content object. Most transform functions take in a url, read the contents of the file, transform it, then save the contents of the file &mdash; returning the url where it was saved to.
+
+For example, a CSS transform may look like this.
+
+```js
+import { assetTransform, useContent } from "super-ssg";
+
+const transformCss = assetTransform(async (content, href) => {
+  let cssString = content.read(href);
+
+  // E.g. cssString = someOptimiser(cssString)
+
+  const href = content.write(cssString, { extension: ".css" });
+  return href;
+});
+
+const ExternalCss = (props) => {
+  const content = useContent();
+  const href = transformCss(props.href);
+  return <link href={href} rel="stylesheet" />;
+};
+```
+
+This might seem like extra code, but it also achieves a few things:
+
+- It lets the page track which assets are used, so will automatically rebuild when any are changed
+- The results are cached
+
+Some important points when using transforms:
+
+- Asset transforms must take `content` as the first parameter, then the remaining parameters **must** be JSON serializable
+- The transform function can be async &mdash; although it doesn't have to be
+- You can return any data, including non-serializable data
+
+There's a few cases where the development server restarts its node instance &mdash; such as when a JS file changes. In this case, the transform cache would normally be cleared, and all transforms must be recomputed after it restarts. For transforms with simple, serializable return values (e.g. returning a url &mdash; like above), we extract the cache before the node instance restarts, then restore it once it's back up. If you want to opt into this behaviour &mdash; and your return value is serializable &mdash; you can add a second argument `{ cacheKey: 'some-unique-string' }`.
+
+## Built-in Transforms
+
+The following are exported so you can do your own pre-processing steps without losing the built-in functionality.
+
+```js
+import {
+  transformCss,
+  transformHtml,
+  transformJs,
+  transformSvg,
+} from "super-ssg";
+```
+
+For example, you could make a component to do your own CSS handling.
+
+```js
+import postcss from "postcss";
+import spiffing from "postcss-spiffing";
+import { assetTransform, useContent } from "super-ssg";
+
+const transformCustomCss = assetTransform(async (content, href) => {
+  let css = content.read(href);
+  css = (await postcss.process([spiffing()]).process(css, { from: href })).css;
+  css = await transformCss(content, css);
+
+  const href = content.write(css, { extension: ".css" });
+  return href;
+});
+
+const CustomCss = (props) => {
+  const content = useContent();
+  const href = transformCustomCss(props.href);
+  return <link href={href} rel="stylesheet" />;
+};
+```
+
+There is currently no way to customise the handling MDX files.

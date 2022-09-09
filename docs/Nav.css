@@ -1,0 +1,111 @@
+.Nav {
+  --inset: 18px;
+}
+
+.Nav__Menu {
+  display: grid;
+  grid: auto / auto auto;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.Nav__Logo {
+  --font-size: 14;
+  --line-height: 24;
+  font-weight: 900;
+  color: currentColor;
+  text-decoration: none;
+}
+
+.Nav__MenuButton {
+  display: block;
+  padding: 8px 0 8px 24px;
+  color: currentColor;
+  text-decoration: none;
+  --font-size: 12;
+  font-weight: 700;
+  --letter-spacing: 0.2;
+  text-transform: uppercase;
+}
+
+.Nav__MenuButton--close {
+  width: 100%;
+  text-align: right;
+}
+
+.Nav__MobileOverlay {
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  display: block;
+
+  padding: var(--gutter) var(--gutter) 24px;
+
+  background: #002b36;
+  color: white;
+
+  clip-path: inset(0 0 100% 0);
+  transition: 0.3s;
+  transition-property: visibility, clip-path;
+}
+
+.Nav__MobileOverlay:target {
+  visibility: visible;
+  clip-path: inset(0 0 0 0);
+}
+
+.Nav__Title {
+  color: #586e75;
+  --font-size: 8;
+  --line-height: 12;
+  font-weight: 700;
+  text-transform: uppercase;
+  --letter-spacing: 1.2;
+  margin: 24px var(--inset) 6px;
+}
+
+.Nav__PageList {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  list-style: none;
+  font-family: "IBM Plex Mono", sans-serif;
+}
+
+.Nav__PageLink {
+  display: block;
+  padding: 8px var(--inset);
+  color: #839496;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.Nav__PageLink.Nav__PageLink--active {
+  background: #073642;
+  color: white;
+}
+
+@media (min-width: 768px) {
+  .Nav__Logo {
+    margin-left: var(--inset);
+  }
+
+  .Nav__MenuButton {
+    display: none;
+  }
+
+  .Nav__MobileOverlay {
+    all: initial;
+  }
+
+  .Nav__Title {
+    color: #839496;
+  }
+
+  .Nav__PageLink {
+    color: #586e75;
+  }
+}

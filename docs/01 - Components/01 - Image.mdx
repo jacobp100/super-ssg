@@ -1,0 +1,68 @@
+The `Image` component optimises and converts images to `WebP`.. Takes a `src` prop as defined in the [assets structure section](</docs/00 - Introduction/01 - Structure.mdx>), and renders a backwards-compatible [`picture` element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture).
+
+```js
+import { Image } from "super-ssg";
+
+<Image src="/path/to/your/image.png" />;
+```
+
+```html
+<picture>
+  <source type="image/webp" srcset="/res/image.webp" />
+  <img src="/res/image.png" />
+</picture>
+```
+
+AVIF is implemented but not enabled, as it currently takes too long to encode.
+
+Conversion to other image formats is only done on production builds. If you see an image without any other image formats, it's because the non-converted format had a smaller filesize. In this case, you'll only see an `img` element (unless other sources were provided).
+
+## Sources
+
+Additional image sources can be provided using the `ImageSource` element. All optimisation and convertions are still performed for each source. Takes a `srcSet`, the same as `src` for the `Image` component.
+
+```js
+import { Image, ImageSource } from "super-ssg";
+
+<Image src="/desktop.png">
+  <ImageSource srcSet="/mobile.png" media="(min-width: 800px)" />
+</Image>;
+```
+
+```html
+<picture>
+  <source
+    type="image/webp"
+    srcset="/res/mobile.webp"
+    media="(min-width: 800px)"
+  />
+  <source srcset="/res/mobile.png" media="(min-width: 800px)" />
+  <source type="image/webp" srcset="/res/desktop.webp" />
+  <img src="/res/desktop.png" />
+</picture>
+```
+
+## Sizes
+
+You can automatically set the `width` and `height` attributes on an image to their pixel values by setting the respective props to `auto`. This works in `ImageSource`s too. If the image is resized, the values are of the final image size.
+
+```js
+<Image src="/image.png" width="auto" height="auto" />
+```
+
+```html
+<img src="/res/image.png" width="100" height="100" />
+```
+
+## Resizing
+
+You can resize and crop images using the `resize` prop.
+
+- `"100w"`: resize to 100px wide, maintaining aspect ratio
+- `"100h"`: resize to 100px tall, maintaining aspect ratio
+- `"100x200"`: resize to 100px wide, 200px tall
+- Object: see [sharp's resize options](https://sharp.pixelplumbing.com/api-resize)
+
+```js
+<Image src="/image.png" resize="100w" />
+```

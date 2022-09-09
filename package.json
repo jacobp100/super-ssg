@@ -1,0 +1,67 @@
+{
+  "name": "super-ssg",
+  "version": "1.0.0",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "bin": {
+    "super-ssg": "./dist/cli/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "docs": "node dist/cli"
+  },
+  "devDependencies": {
+    "@types/chalk": "^2.2.0",
+    "@types/csso": "^5.0.0",
+    "@types/glob": "^8.0.0",
+    "@types/highlight.js": "^10.1.0",
+    "@types/node": "^18.7.16",
+    "@types/react": "^18.0.18",
+    "@types/react-dom": "^18.0.6",
+    "@types/sharp": "^0.30.5",
+    "@types/string-hash": "^1.1.1",
+    "@types/svgo": "^2.6.4",
+    "prettier": "^2.7.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "super-ssg": "link:.",
+    "typescript": "^4.8.3"
+  },
+  "dependencies": {
+    "@babel/core": "^7.19.0",
+    "@babel/generator": "^7.19.0",
+    "@babel/parser": "^7.19.0",
+    "@babel/preset-env": "^7.19.0",
+    "@babel/preset-react": "^7.18.6",
+    "@babel/preset-typescript": "^7.18.6",
+    "@babel/register": "^7.18.9",
+    "@babel/traverse": "^7.19.0",
+    "@babel/types": "7.18.13",
+    "@mdx-js/mdx": "^2.1.3",
+    "@mdx-js/react": "^2.1.3",
+    "@miniflare/core": "^2.8.1",
+    "@miniflare/html-rewriter": "^2.8.1",
+    "@silvenon/remark-smartypants": "^1.0.0",
+    "chalk": "^4.1.2",
+    "chokidar": "^3.5.3",
+    "css-class-generator": "^2.0.0",
+    "csso": "^5.0.5",
+    "glob": "^8.0.3",
+    "highlight.js": "^11.6.0",
+    "http-server": "^14.1.1",
+    "minimatch": "^5.1.0",
+    "p-all": "^4.0.0",
+    "postcss": "^8.4.16",
+    "postcss-transform-classes": "^1.0.0",
+    "posthtml": "^0.16.6",
+    "posthtml-minifier": "^0.1.0",
+    "sharp": "^0.31.0",
+    "string-hash": "^1.1.3",
+    "svgo": "^2.8.0",
+    "terser": "^5.15.0"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}

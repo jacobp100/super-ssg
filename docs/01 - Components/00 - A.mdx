@@ -1,0 +1,13 @@
+Wrapper around `<a>` to map a `href` of an `.mdx` file to its output url. Ignores external links.
+
+This is used for all MDX links.
+
+```js
+import { A } from "super-ssg";
+
+<A href="/site/page.mdx">Page</A>;
+```
+
+```html
+<a href="/site-url">Page</a>
+```

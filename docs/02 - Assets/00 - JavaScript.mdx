@@ -1,0 +1,40 @@
+JavaScript will minify assets &mdash; but lacks a real bundler: each `.js` file will create a `.js` file in your build folder.
+
+JavaScript can be added to a page using the `<ExternalJs />` and `<InlineJS />` components. These both create `script` elements, and take a `src` parameter as described in the [assets structure section](</docs/00 - Introduction/01 - Structure.mdx>), then any other `<script>` attributes.
+
+```jsx
+<ExternalJs src="/path/to/your.js" />
+<InlineJs src="/path/to/your.js" />
+```
+
+```html
+<script src="/res/script.js"></script>
+<script>
+  /* Your JS source */
+</script>
+```
+
+## Imports
+
+It will rewrite imports to other JavaScript assets in your project. The following are supported.
+
+- `import something from "/file/in/your/project.js"`
+- `import("/file/in/your/project.js")`
+- `require.resolve("/file/with/any.extension")` &mdash; outputs a string to the url of the built asset
+
+## Super SSG Exports
+
+It's possible to use `className` and `cssVariable` from this project &mdash; it's only possible to call these functions with strings, and the whole function call is itself replaced a string at build time. See the [CSS section](</docs/02 - Assets/01 - CSS.mdx>).
+
+```js
+import { className, cssVariable } from "super-ssg";
+
+document
+  .querySelector("." + className("Menu"))
+  .style.setProperty(cssVariable("--margin"), "12px");
+```
+
+```js
+// With minified CSS identifiers enabled
+document.querySelector("." + "a").style.setProperty("--a", "12px");
+```

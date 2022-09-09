@@ -1,0 +1,47 @@
+Pages are standard MDX pages.
+
+You can import your own React components and use the components exported by this library &mdash; see the sections under assets.
+
+No exports from your MDX files have any meaning to Super SSG &mdash; but they are passed to your layout (see `Layout` option in the [config](</docs/00 - Introduction/10 - Config.mdx>)).
+
+## Custom Layouts per Page
+
+If you need a custom layout per page, export the layout component you want to use, and allow your config defined layout component to render it.
+
+```
+export { CustomLayout as PageLayout } from "./layout";
+
+# Hello World
+```
+
+```js
+export const DefaultLayout = ({ filename, children }) => (
+  <html>
+    <head>
+      <title>{path.basename(filename)}</title>
+      <meta charSet="utf-8" />
+    </head>
+    <body>
+      <h1>Default Layout</h1>
+      {children}
+    </body>
+  </html>
+);
+
+export const CustomLayout = ({ filename, children }) => (
+  <html>
+    <head>
+      <title>{path.basename(filename)}</title>
+      <meta charSet="utf-8" />
+    </head>
+    <body>
+      <h1>Custom Layout</h1>
+      {children}
+    </body>
+  </html>
+);
+
+export const Layout = ({ PageLayout = DefaultLayout, ...rest }) => (
+  <PageLayout {...rest} />
+);
+```

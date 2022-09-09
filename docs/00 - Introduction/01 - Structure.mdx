@@ -1,0 +1,29 @@
+There's no structure for where you have to put your assets and pages &mdash; put them wherever makes sense for your project.
+
+Super SSG exposes a few HTML element equivalents (see the sections under components). When passing in a `src` or `href` to these components, always use a shash (`/`) followed the relative path from the project root. E.g. with the structure,
+
+```
+My Project
+/ assets
+  / my-image.png
+/ pages
+  / other.mdx
+  / index.mdx
+```
+
+Your `index.mdx` may look like this,
+
+```
+[Markdown links work too](/pages/other.mdx)
+```
+
+Or you may have JavaScript files like this,
+
+```js
+import { A, Image } from "super-ssg";
+
+<A href="/pages/other.mdx">Other</A>
+<Image src="/assets/my-image.png" />;
+```
+
+Assets are optimised and output to `/site/res` with a hashed filename. This means it's possible to set a long cache policy on all assets under `/res`.

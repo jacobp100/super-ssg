@@ -1,0 +1,47 @@
+Create a `site.config.js` file at the root of your project (you can use `.ts` if you like too).
+
+The following options are supported.
+
+## `pages`
+
+A string or array of strings to all your MDX files.
+
+E.g. `pages: "pages/**/*.mdx"`
+
+## `urlForPage`
+
+A function that takes a filename and returns the url to save the `html` page. Urls must start with a `/`.
+
+E.g.
+
+```jsx
+export default {
+  pages: ["**/*.mdx*"],
+  urlForPage: (filename) => "/" + path.basename(filename, ".mdx"),
+};
+```
+
+## `Layout`
+
+A React component that renders the page layout. Provided with props `url`, `filename`, `children`, and any other constants exported from your MDX file.
+
+E.g.
+
+```jsx
+export default {
+  pages: ["**/*.mdx*"],
+  Layout: ({ filename, children }) => (
+    <html>
+      <head>
+        <title>{path.basename(filename)}</title>
+        <meta charSet="utf-8" />
+      </head>
+      <body>{children}</body>
+    </html>
+  ),
+};
+```
+
+## `cssAnalyzer`
+
+See docs for [CSS](</docs/02 - Assets/01 - CSS.mdx>).

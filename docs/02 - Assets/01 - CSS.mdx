@@ -1,0 +1,52 @@
+The CSS system is largely the same as what's in browsers: class names are global, and there's no scoping like CSS modules. There's no CSS-in-JS.
+
+You can take whatever approach you wish to here &mdash; but [BEM](https://css-tricks.com/bem-101/) may be a good idea.
+
+CSS can be added to a page using the `<ExternalCss />` and `<InlineCSS />` components. Both take a `href` parameter as described in the [assets structure section](</docs/00 - Introduction/01 - Structure.mdx>).
+
+```jsx
+<ExternalCss href="/path/to/your.css" />
+<InlineCss href="/path/to/your.css" />
+```
+
+```html
+<link href="/res/styles.css" rel="stylesheet" />
+<style>
+  /* Your CSS source */
+</style>
+```
+
+## CSS Analysis
+
+Should you enable CSS analysis, the build system will optimise CSS class and variable names. It will track classes defined in CSS files and those referenced from non-CSS files, and at the end of the build, will report which classes are unused and which were referenced but don't exist.
+
+To enable this, add the following to your [config](</docs/00 - Introduction/10 - Config.mdx>).
+
+```diff
+  export default {
+    pages: ["**/*.mdx"],
++   cssAnalyzer: true
+  }
+```
+
+Now you'll have to use the utility functions whenever referencing CSS class and variable names:
+
+- `className`: convert a single class name; **don't** include the `.`
+- `cssVariable`: convert a single variable name; **do** include the `--`
+- `classNames`: works similar to the [classnames](https://www.npmjs.com/package/classnames) package; converts all passed in class names
+
+All three are available within your own components and MDX files. Only the first two are available in your [JavaScript](</docs/02 - Assets/00 - JavaScript.mdx>) assets &mdash; and the function calls are converted to strings at build time.
+
+The built in components already apply these utility functions for you &mdash; so don't double apply it! It will throw an error if you try to do this, but only in `watch` mode.
+
+If you're creating your own components, you should apply the utility functions to all class names passed in. Then the logic is simple: if the component starts with an upper-case letter, don't use utility functions. If it starts with a lower-case letter, use utility functions.
+
+```jsx
+import { classNames } from "super-ssg"
+
+// Utility function already applied
+<Video className="SomeClassName" />
+
+// Utility function NOT already applied
+<h1 className={classNames("SomeOtherClassName")} />
+```

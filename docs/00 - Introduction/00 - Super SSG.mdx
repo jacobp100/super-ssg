@@ -1,0 +1,41 @@
+Super SSG is a static site generator with a simple goal: enable optimisations not available in any other project of its sort.
+
+At this state, do not expect it to be friendly to beginners.
+
+It uses [MDX](https://mdxjs.com) and [React](https://reactjs.org) to build pages. Pages are generated at build time, and there is no client side hydration in the browser. This makes it good for blogs and marketing pages, and terrible for web apps.
+
+Unlike most tools, Super SSG does not use build tools like Webpack. Instead, it should really be considered a build tool on its own. It does this by using React server-side rendering to generate all HTML files ahead of time. Any time your page uses assets such as images, CSS, and JavaScript etc., they are optimised on the fly, and output to the build folder.
+
+It features:
+
+- [Dead link checks](</docs/01 - Components/00 - A.mdx>)
+- [Image](</docs/01 - Components/01 - Image.mdx>) optimisation and transcoding to WebP
+- Simple inlining of [CSS](</docs/02 - Assets/01 - CSS.mdx>) and [JavaScript](</docs/02 - Assets/00 - JavaScript.mdx>)
+- CSS class name optimisations with 1&ndash;2 characters per class name
+- Hashed filenames for assets for long term caching
+- Fast builds and even faster rebuilds
+
+To get started,
+
+```
+npm install super-ssg react react-dom
+```
+
+Add the following to your `package.json`,
+
+```diff
++ "scripts": {
++   "start": "super-ssg watch",
++   "build": "super-ssg build",
++ }
+```
+
+And create a file at the top level called `index.mdx` with the following,
+
+```md
+# Hello World
+```
+
+To run a development server, run `npm start`, then open `localhost:8080`.
+
+To create a production build, it's `npm run build`.
