@@ -4,6 +4,7 @@ import * as path from "path";
 import { cwd } from "process";
 import { createContext, useContext } from "react";
 import stringHash from "string-hash";
+import unsafelyReadConfig from "./unsafelyReadConfig";
 
 const libraryPath = path.join(__dirname);
 
@@ -38,7 +39,7 @@ const write = (
   content: Buffer | string,
   { filename, extension }: { filename?: string; extension: string }
 ) => {
-  const basename = filename != null ? filename : `res/${contentHash(content)}`;
+  const basename = filename ?? `/res/${contentHash(content)}`;
   const outputFilename = basename + extension;
 
   const dir = path.dirname(outputFilename);
@@ -48,7 +49,9 @@ const write = (
 
   fs.writeFileSync(path.join(sitePath, outputFilename), content);
 
-  const outputHref = `/${outputFilename}`;
+  // FIXME - we can probably fix this unsafe config reading
+  const baseurl = unsafelyReadConfig().baseurl ?? "/";
+  const outputHref = `${baseurl}${outputFilename}`;
 
   return outputHref;
 };

@@ -1,6 +1,6 @@
 // @ts-expect-error
 import cssClassGenerator from "css-class-generator";
-import { getConfig } from "./config";
+import unsafelyReadConfig from "./unsafelyReadConfig";
 import { subtract } from "./util/set";
 
 /*
@@ -14,7 +14,7 @@ const getCssAnalyzerEnabled = () => {
     return cssAnalyzerEnabled;
   }
 
-  cssAnalyzerEnabled = getConfig({ require }).cssAnalyzer ?? false;
+  cssAnalyzerEnabled = unsafelyReadConfig().cssAnalyzer ?? false;
   return cssAnalyzerEnabled;
 };
 

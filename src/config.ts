@@ -12,6 +12,7 @@ export type Page = {
 
 export type Config = {
   pages?: string[] | string;
+  baseurl?: string;
   urlForPage?: (filename: string) => string;
   Layout?: (props: any) => JSX.Element;
   cssAnalyzer?: boolean;
@@ -19,6 +20,7 @@ export type Config = {
 
 export type ResolvedConfig = {
   pages: Page[];
+  baseurl?: string;
   urlForPage?: (filename: string) => string;
   Layout?: (props: any) => JSX.Element;
 };

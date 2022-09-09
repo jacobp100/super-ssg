@@ -1,4 +1,4 @@
-import path from "path";
+import path, { basename } from "path";
 import { Suspense } from "react";
 import { renderToPipeableStream } from "react-dom/server";
 import { Code } from "./components";
@@ -69,7 +69,15 @@ export default async ({ page, pages }: Props) => {
   let html = await stream.awaited;
   html = html.replace(/<!--(?:\s|\/\$|\$)-->/g, "");
 
-  content.write(html, { filename: page.url, extension: ".html" });
+  let url = page.url;
+  if (config.baseurl != null) {
+    url = url.slice(config.baseurl.length);
+  }
+
+  const filename = url === "/" ? "/index" : url;
+  console.log({ url, filename, pageUrl: page.url });
+
+  content.write(html, { filename, extension: ".html" });
 
   return {
     dependencies: content.dependencies,

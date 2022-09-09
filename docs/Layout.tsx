@@ -17,9 +17,9 @@ export const filenameInfo = (filename: string) => {
 
   return {
     sectionIndex: Number(sectionIndex),
-    sectionTitle,
+    sectionTitle: sectionTitle.replace(/\s+/g, "-"),
     pageIndex: Number(pageIndex),
-    pageTitle,
+    pageTitle: pageTitle.replace(/\s+/g, "-"),
   };
 };
 
