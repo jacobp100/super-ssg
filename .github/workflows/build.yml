@@ -23,7 +23,7 @@ jobs:
         uses: bahmutov/npm-install@v1.6.0
 
       - name: Build
-        run: yarn run build; BASE_URL=https://jacobp100.github.io/super-ssg/ yarn run docs
+        run: yarn run build; BASE_URL=https://jacobp100.github.io/super-ssg yarn run docs
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4.3.3
