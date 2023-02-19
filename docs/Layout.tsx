@@ -64,6 +64,7 @@ export default ({ filename, children }) => {
       <head>
         <title>{pageTitle}</title>
         <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
         <InlineCss src={"/docs/index.css"} />
         <ExternalCss src={["/docs/Nav.css", "/docs/code.css"]} />
       </head>
