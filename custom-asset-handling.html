@@ -16,7 +16,7 @@
 
 <span class="k">const</span> <span class="l U">ExternalCss</span> = (<span class="-c">props</span>) =&gt; {
   <span class="k">const</span> content = <span class="l U">useContent</span>();
-  <span class="k">const</span> href = <span class="l U">transformCss</span>(props.<span class="W">href</span>);
+  <span class="k">const</span> href = <span class="l U">transformCss</span>(content, props.<span class="W">href</span>);
   <span class="k">return</span> <span class="o"><span class="p">&lt;<span class="q">link</span> <span class="r">href</span>=<span class="n">{href}</span> <span class="r">rel</span>=<span class="n">&quot;stylesheet&quot;</span> /&gt;</span></span>;
 };
 </code></pre>
@@ -57,7 +57,7 @@
 
 <span class="k">const</span> <span class="l U">CustomCss</span> = (<span class="-c">props</span>) =&gt; {
   <span class="k">const</span> content = <span class="l U">useContent</span>();
-  <span class="k">const</span> href = <span class="l U">transformCustomCss</span>(props.<span class="W">href</span>);
+  <span class="k">const</span> href = <span class="l U">transformCustomCss</span>(content, props.<span class="W">href</span>);
   <span class="k">return</span> <span class="o"><span class="p">&lt;<span class="q">link</span> <span class="r">href</span>=<span class="n">{href}</span> <span class="r">rel</span>=<span class="n">&quot;stylesheet&quot;</span> /&gt;</span></span>;
 };
 </code></pre>
