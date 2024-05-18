@@ -1,50 +1,9 @@
-<!DOCTYPE html><html><head><title>Image</title><meta charSet="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><style>@font-face{font-family:"IBM Plex";src:url(https://jacobp100.github.io/super-ssg/res/92671ede.woff2)}@font-face{font-family:"IBM Plex";font-weight:700;src:url(https://jacobp100.github.io/super-ssg/res/37dc41f5.woff2)}@font-face{font-family:"IBM Plex";font-style:italic;src:url(https://jacobp100.github.io/super-ssg/res/be45b905.woff2)}@font-face{font-family:"IBM Plex";font-weight:700;font-style:italic;src:url(https://jacobp100.github.io/super-ssg/res/8c41f7c6.woff2)}@font-face{font-family:"IBM Plex Mono";src:url(https://jacobp100.github.io/super-ssg/res/e51cf30b.woff2)}@font-face{font-family:"IBM Plex Mono";font-weight:700;src:url(https://jacobp100.github.io/super-ssg/res/4dc2d08f.woff2)}:root{--f:1;--e:12px}body{margin:var(--e) var(--e) calc(var(--e)*2);font-family:"IBM Plex",sans-serif;--b:16;--c:22;background:#fdf6e3;color:#657b83}*,::after,::before{box-sizing:border-box}*{font-size:calc(var(--b)*var(--g));line-height:calc(var(--c)*var(--g));letter-spacing:calc(var(--d)*var(--g));--g:calc(
-    (var(--f) * 1rem / 16) +
-      ((1 - var(--f)) * 1px)
-  )}h1,h2{--d:-1;font-weight:700}h1{margin:42px 0 18px;--b:32;--c:48}h2{margin:36px 0 18px;--b:24;--c:32}p{margin:16px 0}a{color:#2aa198}code,pre{background:#eee8d5;border-radius:3px}pre{padding:12px var(--e);margin:24px calc(-1*var(--e));overflow-x:scroll}code{font-family:"IBM Plex Mono",monospace;padding:2px 8px;word-break:break-all}pre code{background:0 0;padding:0;border-radius:0;word-break:initial}@media (min-width:768px){:root{--e:24px}body{display:grid;grid:1fr/275px minmax(0,100%);height:100%;column-gap:48px}code{word-break:initial}}</style><link href="https://jacobp100.github.io/super-ssg/res/5e59002e.css" rel="stylesheet"/></head><body><nav class="a"><div class="b"><a href="/" class="c">Super SSG</a><a class="d" href="#menu">Menu</a></div><div id="menu" class="e"><a class="d f" href="#">Close</a><h6 class="g">Introduction</h6><ul class="h"><li><a href="https://jacobp100.github.io/super-ssg/" class="i">Super SSG</a></li><li><a href="https://jacobp100.github.io/super-ssg/structure" class="i">Structure</a></li><li><a href="https://jacobp100.github.io/super-ssg/config" class="i">Config</a></li><li><a href="https://jacobp100.github.io/super-ssg/pages" class="i">Pages</a></li></ul><h6 class="g">Components</h6><ul class="h"><li><a href="https://jacobp100.github.io/super-ssg/a" class="i">A</a></li><li><a href="https://jacobp100.github.io/super-ssg/image" class="i j">Image</a></li><li><a href="https://jacobp100.github.io/super-ssg/svg" class="i">SVG</a></li><li><a href="https://jacobp100.github.io/super-ssg/video" class="i">Video</a></li></ul><h6 class="g">Assets</h6><ul class="h"><li><a href="https://jacobp100.github.io/super-ssg/javascript" class="i">JavaScript</a></li><li><a href="https://jacobp100.github.io/super-ssg/css" class="i">CSS</a></li><li><a href="https://jacobp100.github.io/super-ssg/custom-asset-handling" class="i">Custom Asset Handling</a></li></ul><h6 class="g">Utils</h6><ul class="h"><li><a href="https://jacobp100.github.io/super-ssg/usetableofcontents" class="i">useTableOfContents</a></li></ul><h6 class="g">Notes</h6><ul class="h"><li><a href="https://jacobp100.github.io/super-ssg/babel" class="i">Babel</a></li></ul></div></nav><main><h1>Image</h1><p>The <code>Image</code> component optimises and converts images to <code>WebP</code>.. Takes a <code>src</code> prop as defined in the <a href="https://jacobp100.github.io/super-ssg/structure">assets structure section</a>, and renders a backwards-compatible <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture"><code>picture</code> element</a>.</p>
-<pre><code><span class="k">import</span> { <span class="l m">Image</span> } <span class="k">from</span> <span class="n">&quot;super-ssg&quot;</span>;
-
-<span class="o"><span class="p">&lt;<span class="q">Image</span> <span class="r">src</span>=<span class="n">&quot;/path/to/your/image.png&quot;</span> /&gt;</span></span>;
-</code></pre>
-<pre><code><span class="p">&lt;<span class="q">picture</span>&gt;</span>
-  <span class="p">&lt;<span class="q">source</span> <span class="r">type</span>=<span class="n">&quot;image/webp&quot;</span> <span class="r">srcset</span>=<span class="n">&quot;/res/image.webp&quot;</span> /&gt;</span>
-  <span class="p">&lt;<span class="q">img</span> <span class="r">src</span>=<span class="n">&quot;/res/image.png&quot;</span> /&gt;</span>
-<span class="p">&lt;/<span class="q">picture</span>&gt;</span>
-</code></pre>
-<p>AVIF is implemented but not enabled, as it currently takes too long to encode.</p>
-<p>Conversion to other image formats is only done on production builds. If you see an image without any other image formats, it’s because the non-converted format had a smaller filesize. In this case, you’ll only see an <code>img</code> element (unless other sources were provided).</p>
-<h2>Sources</h2>
-<p>Additional image sources can be provided using the <code>ImageSource</code> element. All optimisation and convertions are still performed for each source. Takes a <code>srcSet</code>, the same as <code>src</code> for the <code>Image</code> component.</p>
-<pre><code><span class="k">import</span> { <span class="l m">Image</span>, <span class="l m">ImageSource</span> } <span class="k">from</span> <span class="n">&quot;super-ssg&quot;</span>;
-
-<span class="o"><span class="p">&lt;<span class="q">Image</span> <span class="r">src</span>=<span class="n">&quot;/desktop.png&quot;</span>&gt;</span>
-  <span class="p">&lt;<span class="q">ImageSource</span> <span class="r">srcSet</span>=<span class="n">&quot;/mobile.png&quot;</span> <span class="r">media</span>=<span class="n">&quot;(min-width: 800px)&quot;</span> /&gt;</span>
-<span class="p">&lt;/<span class="q">Image</span>&gt;</span></span>;
-</code></pre>
-<pre><code><span class="p">&lt;<span class="q">picture</span>&gt;</span>
-  <span class="p">&lt;<span class="q">source</span>
-    <span class="r">type</span>=<span class="n">&quot;image/webp&quot;</span>
-    <span class="r">srcset</span>=<span class="n">&quot;/res/mobile.webp&quot;</span>
-    <span class="r">media</span>=<span class="n">&quot;(min-width: 800px)&quot;</span>
-  /&gt;</span>
-  <span class="p">&lt;<span class="q">source</span> <span class="r">srcset</span>=<span class="n">&quot;/res/mobile.png&quot;</span> <span class="r">media</span>=<span class="n">&quot;(min-width: 800px)&quot;</span> /&gt;</span>
-  <span class="p">&lt;<span class="q">source</span> <span class="r">type</span>=<span class="n">&quot;image/webp&quot;</span> <span class="r">srcset</span>=<span class="n">&quot;/res/desktop.webp&quot;</span> /&gt;</span>
-  <span class="p">&lt;<span class="q">img</span> <span class="r">src</span>=<span class="n">&quot;/res/desktop.png&quot;</span> /&gt;</span>
-<span class="p">&lt;/<span class="q">picture</span>&gt;</span>
-</code></pre>
-<h2>Sizes</h2>
-<p>You can automatically set the <code>width</code> and <code>height</code> attributes on an image to their pixel values by setting the respective props to <code>auto</code>. This works in <code>ImageSource</code>s too. If the image is resized, the values are of the final image size.</p>
-<pre><code>&lt;<span class="l m">Image</span> src=<span class="n">&quot;/image.png&quot;</span> width=<span class="n">&quot;auto&quot;</span> height=<span class="n">&quot;auto&quot;</span> /&gt;
-</code></pre>
-<pre><code><span class="p">&lt;<span class="q">img</span> <span class="r">src</span>=<span class="n">&quot;/res/image.png&quot;</span> <span class="r">width</span>=<span class="n">&quot;100&quot;</span> <span class="r">height</span>=<span class="n">&quot;100&quot;</span> /&gt;</span>
-</code></pre>
-<h2>Resizing</h2>
-<p>You can resize and crop images using the <code>resize</code> prop.</p>
-<ul>
-<li><code>&quot;100w&quot;</code>: resize to 100px wide, maintaining aspect ratio</li>
-<li><code>&quot;100h&quot;</code>: resize to 100px tall, maintaining aspect ratio</li>
-<li><code>&quot;100x200&quot;</code>: resize to 100px wide, 200px tall</li>
-<li>Object: see <a href="https://sharp.pixelplumbing.com/api-resize">sharp’s resize options</a></li>
-</ul>
-<pre><code>&lt;<span class="l m">Image</span> src=<span class="n">&quot;/image.png&quot;</span> resize=<span class="n">&quot;100w&quot;</span> /&gt;
-</code></pre></main></body></html>
+<!--$!--><template data-msg="Could not page with href &quot;/docs/docs/00 - Introduction/00 - Super SSG.mdx&quot;" data-stck="
+    at exports.default (/home/runner/work/super-ssg/super-ssg/dist/components/A.js:30:62)
+    at div
+    at nav
+    at body
+    at html
+    at _default (/home/runner/work/super-ssg/super-ssg/docs/Layout.tsx:72:24)
+    at PageComponent (/home/runner/work/super-ssg/super-ssg/dist/renderPage.js:249:45)
+    at Suspense"></template>Loading
