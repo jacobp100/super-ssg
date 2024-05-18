@@ -71,9 +71,9 @@ export default ({ filename, children }) => {
       <body>
         <nav className={classNames("Nav")}>
           <div className={classNames("Nav__Menu")}>
-            <a href="/" className={classNames("Nav__Logo")}>
+            <A href="/docs/docs/00 - Introduction/00 - Super SSG.mdx" className={classNames("Nav__Logo")}>
               Super SSG
-            </a>
+            </A>
             <a className={classNames("Nav__MenuButton")} href="#menu">
               Menu
             </a>
