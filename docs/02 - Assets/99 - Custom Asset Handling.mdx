@@ -16,7 +16,7 @@ const transformCss = assetTransform(async (content, href) => {
 
 const ExternalCss = (props) => {
   const content = useContent();
-  const href = transformCss(props.href);
+  const href = transformCss(content, props.href);
   return <link href={href} rel="stylesheet" />;
 };
 ```
@@ -65,7 +65,7 @@ const transformCustomCss = assetTransform(async (content, href) => {
 
 const CustomCss = (props) => {
   const content = useContent();
-  const href = transformCustomCss(props.href);
+  const href = transformCustomCss(content, props.href);
   return <link href={href} rel="stylesheet" />;
 };
 ```
